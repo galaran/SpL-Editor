@@ -1,0 +1,7 @@
+/build/
+/dist/
+/nbproject/private/
+/nbproject/configs/
+/store/
+manifest.mf
+/test/
