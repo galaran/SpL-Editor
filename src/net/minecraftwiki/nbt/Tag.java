@@ -518,7 +518,7 @@ public class Tag {
         return found;
     }
     
-    // not safe
+    /** Unsafe. TODO: check argument type */
     public void setValue(Object val) {
         value = val;
     }

@@ -13,6 +13,8 @@ import static com.galaran.spleditor.gui.swing.GBC.*;
 
 class SplGui {
     
+    private static final String VERSION = "1.0";
+    
     private static final int FRAME_WIDTH = 310;
     private static final int LABEL_GAP = 5;
     private static final int ROW_GAP = 5;
@@ -96,6 +98,7 @@ class SplGui {
 
         public SplFrame() {
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setTitle("SpL Editor " + VERSION);
         
             rootBox = Box.createVerticalBox();
 
