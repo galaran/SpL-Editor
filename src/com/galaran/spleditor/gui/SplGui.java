@@ -13,7 +13,7 @@ import static com.galaran.spleditor.gui.swing.GBC.*;
 
 class SplGui {
     
-    private static final String VERSION = "1.0";
+    private static final String VERSION = "1.1";
     
     private static final int FRAME_WIDTH = 310;
     private static final int LABEL_GAP = 5;
@@ -82,7 +82,7 @@ class SplGui {
     JButton reloadButton = new JButton();
     JButton saveButton = new JButton();
     
-    public SplGui() {
+    SplGui() {
         frame = new SplFrame();
     }
     
@@ -96,9 +96,10 @@ class SplGui {
 
     private class SplFrame extends JFrame {
 
-        public SplFrame() {
+        SplFrame() {
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setTitle("SpL Editor " + VERSION);
+            setIconImage(loadIcon("mycelium.png").getImage());
         
             rootBox = Box.createVerticalBox();
 
@@ -145,7 +146,7 @@ class SplGui {
 
     private class ButtonPanel extends JPanel {
 
-        public ButtonPanel() {
+        ButtonPanel() {
             reloadButton.setToolTipText("Reload worlds");
             
             Box box = Box.createHorizontalBox();
@@ -163,7 +164,7 @@ class SplGui {
     
     private class WorldPanel extends JPanel {
         
-        public WorldPanel() {
+        WorldPanel() {
             setLayout(new GridBagLayout());
             
             // set properties
@@ -196,7 +197,7 @@ class SplGui {
     
     private class CoordPanel extends JPanel {
 
-        public CoordPanel() {
+        CoordPanel() {
             setLayout(new GridBagLayout());
             
             // add coord panels to root panel
@@ -267,7 +268,7 @@ class SplGui {
     
     private class TimeWeatherPanel extends JPanel {
 
-        public TimeWeatherPanel() {
+        TimeWeatherPanel() {
             setLayout(new GridBagLayout());
             setBorder(BorderFactory.createTitledBorder("Time & Weather"));
             
@@ -306,7 +307,7 @@ class SplGui {
     
     private class CharacterModePanel extends JPanel {
         
-        public CharacterModePanel() {
+        CharacterModePanel() {
             setLayout(new GridBagLayout());
             
             JLabel levelLabel = new JLabel(expOrb);

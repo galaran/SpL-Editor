@@ -9,7 +9,7 @@ import net.minecraftwiki.nbt.Tag;
 class NbtLevel {
     private final Tag rootTag;
 
-    // direct references
+    // direct tag references
     private final Tag lastPlayedTag; // long
     
     private final Tag nameTag; // String
@@ -36,6 +36,12 @@ class NbtLevel {
 
     private final Tag gameTypeTag; // int
     private final Tag hardcoreTag; // byte, null allowed
+    
+    // ablilities (1.9beta pre5)
+    private Tag flyingTag = null; // byte
+    private Tag instabuildTag = null; // byte
+    private Tag mayflyTag = null; // byte
+    private Tag invulnerableTag = null; // byte
 
     NbtLevel(File levelDir) throws Exception {
         rootTag = Tag.readFrom(new FileInputStream(new File(levelDir, "level.dat")));
@@ -71,6 +77,15 @@ class NbtLevel {
 
         gameTypeTag = data.getTagByName("GameType");
         hardcoreTag = data.findTagByName("hardcore"); // null for 1.8 beta level
+        
+        // 1.9beta pre5+
+        Tag abilities = player.findTagByName("abilities");
+        if (abilities != null) {
+            flyingTag = abilities.getTagByName("flying");
+            instabuildTag = abilities.getTagByName("instabuild");
+            mayflyTag = abilities.getTagByName("mayfly");
+            invulnerableTag = abilities.getTagByName("invulnerable");
+        }
     }
        
     void mergeWith(GuiLevel lev) {
@@ -102,8 +117,16 @@ class NbtLevel {
         levelTag.setValue(new Integer(lev.level));
 
         gameTypeTag.setValue(lev.gameMode.getGameType());
-        if (lev.gameMode.getHardcore() != null) {  // null for 1.8 beta level
+        if (lev.gameMode.getHardcore() != null) {  // 1.9 beta +
             hardcoreTag.setValue(lev.gameMode.getHardcore());
+        }
+        
+        if (flyingTag != null) { // if abilities available (1.9pre 5 +)
+            Byte allAbil = lev.gameMode.getGameType().byteValue(); // 1 - creative, 0 - other
+            flyingTag.setValue(allAbil);
+            instabuildTag.setValue(allAbil);
+            mayflyTag.setValue(allAbil);
+            invulnerableTag.setValue(allAbil);
         }
     }
     
