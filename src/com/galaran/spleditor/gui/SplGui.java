@@ -13,7 +13,7 @@ import static com.galaran.spleditor.gui.swing.GBC.*;
 
 class SplGui {
     
-    private static final String VERSION = "1.1";
+    private static final String VERSION = "1.2";
     
     private static final int FRAME_WIDTH = 310;
     private static final int LABEL_GAP = 5;
@@ -377,7 +377,7 @@ class SplGui {
     }
     
     void setRainTimeTicks(int rainTimeTicks) {
-        rainTime.setValue(rainTimeTicks / TICKS_IN_MINUTE);
+        rainTime.setValue(new Long(rainTimeTicks / TICKS_IN_MINUTE));
     }
     
     int getRainTimeTicks() {

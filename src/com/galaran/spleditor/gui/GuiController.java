@@ -95,14 +95,14 @@ public class GuiController {
         gui.dimGroup.setSelected(getMapKeyByValue(butDimMap, lev.dimension), true);
         
         // position
-        gui.posX.setValue(lev.posX);
-        gui.posY.setValue(lev.posY);
-        gui.posZ.setValue(lev.posZ);
+        gui.posX.setValue(new Long(lev.posX));
+        gui.posY.setValue(new Long(lev.posY));
+        gui.posZ.setValue(new Long(lev.posZ));
         
         // spawn
-        gui.spawnX.setValue(lev.spawnX);
-        gui.spawnY.setValue(lev.spawnY);
-        gui.spawnZ.setValue(lev.spawnZ);
+        gui.spawnX.setValue(new Long(lev.spawnX));
+        gui.spawnY.setValue(new Long(lev.spawnY));
+        gui.spawnZ.setValue(new Long(lev.spawnZ));
         
         // time
         gui.timeGroup.clearSelection();
@@ -125,9 +125,9 @@ public class GuiController {
         gui.setRainTimeTicks(lev.rainTime);
         
         // hp, food, level
-        gui.hp.setValue(lev.hp);
-        gui.food.setValue(lev.food);
-        gui.level.setValue(lev.level);
+        gui.hp.setValue(new Long(lev.hp));
+        gui.food.setValue(new Long(lev.food));
+        gui.level.setValue(new Long(lev.level));
         
         // mode
         // set hardcore option visibility and heart image

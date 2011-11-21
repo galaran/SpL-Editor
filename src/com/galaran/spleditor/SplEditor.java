@@ -18,13 +18,13 @@ public class SplEditor {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             
             // check, whether app jar is in minecraft bin dir
-            File savesDir = checkMcDirAndGetSavesDir(new File("./.."));
+            File savesDir = checkIsMcDirAndGetSavesPath(new File("./.."));
             if (savesDir == null) {
                 // try to find in standart path
-                savesDir = getStandartSavesDir();
+                savesDir = getDefaultSavesPath();
                 if (savesDir == null) {
-                    Utils.printErrorMessageAndExit("Error locating minecraft.\n"
-                            + "Try to put this jar to the minecraft/bin folder");
+                    Utils.printErrorMessageAndExit("Minecraft not found in the default path.\n"
+                            + "Put this jar/exe to the minecraft/bin folder");
                 }
             }
 
@@ -34,23 +34,23 @@ public class SplEditor {
             
         } catch (Throwable t) {
             try {
-                File errLog = new File("_crash.log");
+                File errLog = new File("spl_crash.log");
                 errLog.createNewFile();
-                PrintWriter pw = new PrintWriter(errLog);
-                t.printStackTrace(pw);
-                pw.close();
+                PrintWriter errWriter = new PrintWriter(errLog);
+                t.printStackTrace(errWriter);
+                errWriter.close();
             } catch (Exception ex) { }
-            printErrorMessageAndExit("An unexpected error. Please see _crash.log file for details");
+            printErrorMessageAndExit("An unexpected error. Please see spl_crash.log file for details");
         }
     }
     
-    private static File getStandartSavesDir() {
+    private static File getDefaultSavesPath() {
         String mcPath = null;
         String osName = System.getProperty("os.name").toLowerCase();
         if(osName.contains("windows")) {
             mcPath = System.getenv("APPDATA") + "/.minecraft";
         } else if(osName.contains("linux")) {
-            mcPath = System.getProperty("user.home") + "\\.minecraft";
+            mcPath = System.getProperty("user.home") + "/.minecraft";
         } else if(osName.contains("mac")) {
             mcPath = System.getProperty("user.home") + "/Library/Application Support/minecraft";
         } else {
@@ -59,10 +59,10 @@ public class SplEditor {
         
         File mcDir = new File(mcPath);
         
-        return checkMcDirAndGetSavesDir(mcDir);
+        return checkIsMcDirAndGetSavesPath(mcDir);
     }
     
-    private static File checkMcDirAndGetSavesDir(File mcDir) {
+    private static File checkIsMcDirAndGetSavesPath(File mcDir) {
         if (!mcDir.exists() && !mcDir.isDirectory())
             return null;
         if (!new File(mcDir, "bin/minecraft.jar").exists())
