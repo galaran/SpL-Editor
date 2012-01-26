@@ -20,7 +20,7 @@ public class SplEditor {
             // check, whether app jar is in minecraft bin dir
             File savesDir = checkIsMcDirAndGetSavesPath(new File("./.."));
             if (savesDir == null) {
-                // try to find in standart path
+                // try to find minecraft in the default path
                 savesDir = getDefaultSavesPath();
                 if (savesDir == null) {
                     Utils.printErrorMessageAndExit("Minecraft not found in the default path.\n"
@@ -28,7 +28,7 @@ public class SplEditor {
                 }
             }
 
-            LevelListLoader loader = new LevelListLoader(savesDir);
+            LevelLoader loader = new LevelLoader(savesDir);
             GuiController guiController = new GuiController(loader);
             guiController.showGui();
             

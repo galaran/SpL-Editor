@@ -5,7 +5,7 @@ import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import com.galaran.spleditor.LevelListLoader;
+import com.galaran.spleditor.LevelLoader;
 import com.galaran.spleditor.GuiLevel;
 import com.galaran.spleditor.GuiLevel.Dimension;
 import com.galaran.spleditor.GuiLevel.GameMode;
@@ -13,20 +13,21 @@ import static com.galaran.spleditor.gui.Utils.*;
 
 public class GuiController {
     
-    private final LevelListLoader loader;
+    private final LevelLoader loader;
     private final Object worldDirsLock = new Object();
     private final SplGui gui;
         
     private DefaultComboBoxModel levelModel;
     private int prevSelectedIndex;
     
-    public GuiController(LevelListLoader loader) {
+    public GuiController(LevelLoader loader) {
         this.loader = loader;
 
-        Object[] levels = loader.loadLevels().toArray();
-        if (levels.length == 0) {
-            Utils.printErrorMessageAndExit("You have no worlds in minecraft");
+        List<GuiLevel> levList = loader.loadLevels();
+        if (levList == null) {
+            Utils.printErrorMessageAndExit("No minecraft worlds found");
         }
+        Object[] levels = levList.toArray();
         
         // init GUI
         gui = new SplGui();

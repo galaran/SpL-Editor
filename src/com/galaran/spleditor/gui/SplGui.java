@@ -13,7 +13,7 @@ import static com.galaran.spleditor.gui.swing.GBC.*;
 
 class SplGui {
     
-    private static final String VERSION = "1.2";
+    private static final String VERSION = "1.3";
     
     private static final int FRAME_WIDTH = 310;
     private static final int LABEL_GAP = 5;

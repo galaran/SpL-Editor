@@ -3,5 +3,12 @@
 /nbproject/private/
 /nbproject/configs/
 /store/
+
+/.idea/
+SplEditor.iml
+/artifacts/
+/out/
+
+/META-INF/
 /wrapper/
 manifest.mf
